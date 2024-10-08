@@ -1,4 +1,4 @@
---old channels class for deber (replaced by masworld class)--
+--[deber.py] old channels class for deber (replaced by masworld class)--
 class channels(masworld, toml_struct):
     """channel data objects from masworld that can send messages through deber"""
     def __init__(self):
@@ -12,3 +12,4 @@ class channels(masworld, toml_struct):
     def __getitem__(self, key):
         channeid = super().__getitem__(key)
         return bot.get_channel(int(channeid))
+-------------------------------------------------------------------------
