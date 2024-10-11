@@ -6,7 +6,7 @@ from discord import interactions
 from dotenv import load_dotenv
 from _deberlive import keep_alive
 #class masworld has complex toml parsing for accesing str as a discord channel that you can use <channel>.send() on :)
-from _serverside import masworld, emoji, toml_struct #backend server stuff
+from _serverside import emoji, toml_struct, masworld #backend server stuff
 import os
 import json
 import asyncio #for debugging offline
@@ -19,12 +19,12 @@ from typing import Literal
 #https://discordpy.readthedocs.io/en/stable/api.html use this for the documation
 
 
-datafile = json.load(open(r"./data/datafile.json"))
-userfile = open(r"./data/users.txt").read()
+datafile = json.load(open(r"./deber/data/datafile.json"))
+userfile = open(r"./deber/data/users.txt").read()
 
 def update_data():
     global datafile
-    datafile = json.load(open(r"./data/datafile.json"))
+    datafile = json.load(open(r"./deber/data/datafile.json"))
 
 def dprint(msg, color:Literal["blue", "yellow","red","purple"]="blue"):
     """deber logging (with color)
@@ -93,7 +93,7 @@ async def strike(ctx: Context, user):
     else:
         try:
             datafile["users"][user]["strikes"] = datafile["users"][user]["strikes"] + 1 #message strikes
-            with open(r"./data/datafile.json", "w") as file:
+            with open(r"./deber/data/datafile.json", "w") as file:
                 json.dump(datafile, file, indent=4)
             sleep(0.3)
             update_data()
@@ -127,7 +127,7 @@ async def strike_count(ctx: Context, user: discord.Member):
 async def builderuserfile(ctx: Context):
     memcount = 0
     for member in ctx.guild.members:
-        with open(r"./data/users.txt", "a+") as file:
+        with open(r"./deber/data/users.txt", "a+") as file:
             skipmem = False
             for line in file.readlines():
                 if str(member) in str(line):
@@ -147,7 +147,7 @@ async def builderuserfile(ctx: Context):
 @bot.command("rebuildmeta") #register new users onto datafile
 async def rebuildmeta(ctx: Context):
     """register new users onto datafile"""
-    with open(r"./data/users.txt", "r") as file:
+    with open(r"./deber/data/users.txt", "r") as file:
         for name in file.readlines():
             name=name.strip()
             if str(name) in [user.strip() for user in datafile["users"]]:
@@ -161,9 +161,11 @@ async def rebuildmeta(ctx: Context):
     dprint("datafile was rebuilt successfully")
     await ctx.send("datafile was rebuilt successfully")
 
+
 @bot.command("testfunc") #testing stuff
 async def testfunc(ctx: Context):
     await ctx.send(masworld.serverstuff["name"])
+
 
 @bot.tree.command(name="online") # list online players
 async def online(interaction:discord.Interaction):
@@ -174,6 +176,7 @@ async def online(interaction:discord.Interaction):
         await interaction.response.send_message("an error occured with `/online` :sob:")
         dprint(f"{e.with_traceback()}", color="red")
 
+        
 @bot.command("deber")
 async def deberconsole(ctx: Context, *args): #console for deber commands (ie. restart, shutdown, etc.)
     if args[0] == "restart":

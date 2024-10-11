@@ -34,8 +34,8 @@ class toml_struct:
 
 class masworld:
     """structure values and key info from the Masworld SMP server"""
-    channels = toml_struct("./data/channels.toml")
-    serverstuff = json.load(open("./data/datafile.json"))["server"]
+    channels = toml_struct("./deber/data/channels.toml")
+    serverstuff = json.load(open("./deber/data/datafile.json"))["server"]
     bot = None
 
     @classmethod
