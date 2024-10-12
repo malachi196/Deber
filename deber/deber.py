@@ -154,7 +154,7 @@ async def rebuildmeta(ctx: Context):
                 continue
             else:
                 datafile["users"][name] = {"username":"", "realname":"", "nickname":"", "strikes":0}
-        with open(r"./data/datafile.json", "w") as file:
+        with open(r"./deber/data/datafile.json", "w") as file:
             json.dump(datafile, file, indent=4)
         sleep(0.2)
         update_data()
