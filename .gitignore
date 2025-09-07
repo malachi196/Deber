@@ -6,3 +6,4 @@ deber/dio.py
 *.sh
 deber/__pycache__/
 deber/backend_io/
+notes.txt
