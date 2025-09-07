@@ -3,6 +3,8 @@ import toml
 import json
 from discord.ext import commands
 
+#edit from 4/19/25: Masworld is archived, and the new server is named malworld (after malachi196), ecen thought class still called masworld.
+
 class toml_struct:
     """ ## toml_struct
     ------
@@ -36,8 +38,9 @@ class masworld:
     """structure values and key info from the Masworld SMP server"""
     channels = toml_struct("./deber/data/channels.toml")
     serverstuff = json.load(open("./deber/data/datafile.json"))["server"]
-    bot = None
-
+    roles = toml_struct("./deber/data/roles.toml")
+    #bot = None
+    """
     @classmethod
     def set_bot(cls, bot_instance:commands.AutoShardedBot):
         cls.bot = bot_instance
@@ -64,6 +67,7 @@ class masworld:
                 channel_id = self.sectiondata[key]
                 return masworld.bot.get_channel(int(channel_id))
             raise KeyError(f"'{key}' not found in section")
+    """
 
 class emoji:
     """masworld emoji codes available for fomatting into messages!"""

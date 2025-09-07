@@ -1,2 +1,8 @@
-.env
+deber/.env
 deber/data/
+old-technique-archive/
+deberrolesmsg.txt
+deber/dio.py
+*.sh
+deber/__pycache__/
+deber/backend_io/

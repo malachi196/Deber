@@ -1,3 +1,8 @@
 discord
 toml
 aiohttp
+rich
+pydantic>=2
+fastapi
+uvicorn
+ollama

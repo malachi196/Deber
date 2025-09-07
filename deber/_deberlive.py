@@ -9,7 +9,7 @@ app = FastAPI()
 
 @app.get("/")
 async def _index():
-    return "deber[DEBUG] is online"
+    return "deber is online"
 
 class InvalidThread(Exception):
     """The thread provided does not exist"""
@@ -17,7 +17,7 @@ class InvalidThread(Exception):
 
 def __run():
     try:
-        uvicorn.run(host="localhost", app=app, port=8080)
+        uvicorn.run(host="10.0.1.105", app=app, port=8080) #default host is localhost
     except KeyboardInterrupt:
         pass
 
